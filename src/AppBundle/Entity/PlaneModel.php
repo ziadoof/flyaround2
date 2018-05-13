@@ -2,8 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * PlaneModel
  *
@@ -12,6 +10,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PlaneModel
 {
+
+    /*
+     *  Adding personal methods /variables
+     */
+    public function __toString()
+    {
+        //return the PlaneModel object with model.
+        return $this->model;
+    }
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flight", mappedBy="plane")
+     */
+    private $plane;
+
     /**
      * @var int
      *
@@ -186,5 +200,45 @@ class PlaneModel
     {
         return $this->isAvailable;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->plane = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add plane
+     *
+     * @param \AppBundle\Entity\Flight $plane
+     *
+     * @return PlaneModel
+     */
+    public function addPlane($plane)
+    {
+        $this->plane[] = $plane;
+
+        return $this;
+    }
+
+    /**
+     * Remove plane
+     *
+     * @param \AppBundle\Entity\Flight $plane
+     */
+    public function removePlane($plane)
+    {
+        $this->plane->removeElement($plane);
+    }
+
+    /**
+     * Get plane
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlane()
+    {
+        return $this->plane;
+    }
+}
