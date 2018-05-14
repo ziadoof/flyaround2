@@ -1,7 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
-
+use Doctrine\ORM\Mapping as ORM;
 /**
  * PlaneModel
  *
@@ -24,7 +24,7 @@ class PlaneModel
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flight", mappedBy="plane")
      */
-    private $plane;
+    private $planes;
 
     /**
      * @var int
@@ -240,5 +240,15 @@ class PlaneModel
     public function getPlane()
     {
         return $this->plane;
+    }
+
+    /**
+     * Get planes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlanes()
+    {
+        return $this->planes;
     }
 }

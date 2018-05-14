@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 /**
  * Flight
  *
@@ -24,7 +25,7 @@ class Flight
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flight", mappedBy="flight")
      */
-    private $flight;
+    private $flights;
 
 
     /**
@@ -36,6 +37,7 @@ class Flight
      */
     private $id;
 
+
     /**
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Site", inversedBy="departures")
@@ -46,7 +48,7 @@ class Flight
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Site", inversedBy="arrival")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Site", inversedBy="arrivals")
      * @ORM\JoinColumn(nullable=false)
      */
     private $arrival;
@@ -54,7 +56,7 @@ class Flight
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PlaneModel", inversedBy="plane")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PlaneModel", inversedBy="planes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $plane;
@@ -62,7 +64,7 @@ class Flight
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="pilot")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="pilots")
      * @ORM\JoinColumn(nullable=false)
      */
     private $pilot;
@@ -399,5 +401,15 @@ class Flight
     public function getFlight()
     {
         return $this->flight;
+    }
+
+    /**
+     * Get flights
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFlights()
+    {
+        return $this->flights;
     }
 }

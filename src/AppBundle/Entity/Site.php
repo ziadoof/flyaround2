@@ -1,6 +1,6 @@
 <?php
 namespace AppBundle\Entity;
-
+use Doctrine\ORM\Mapping as ORM;
     /**
      * Site
      *
@@ -28,7 +28,7 @@ class Site
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flight", mappedBy="arrival")
      */
-    private $arrival;
+    private $arrivals;
 
     /**
      * @var int
@@ -279,5 +279,15 @@ class Site
     public function getArrival()
     {
         return $this->arrival;
+    }
+
+    /**
+     * Get arrivals
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArrivals()
+    {
+        return $this->arrivals;
     }
 }

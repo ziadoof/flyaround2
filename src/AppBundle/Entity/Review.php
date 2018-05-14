@@ -1,7 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
-
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Review
@@ -33,13 +33,13 @@ class Review
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userRated")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $userRated;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="reviewAuthor")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="author")
      * @ORM\JoinColumn(nullable=false)
      */
     private $reviewAuthor;

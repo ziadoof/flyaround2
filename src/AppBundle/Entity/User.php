@@ -1,7 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
-
+use Doctrine\ORM\Mapping as ORM;
 /**
  * User
  *
@@ -25,23 +25,13 @@ class User
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flight", mappedBy="pilot")
      */
-    private $pilot;
-
-
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flight", mappedBy="userRated")
-     */
-    private $userRated;
-
-
+    private $pilots;
 
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flight", mappedBy="reviewAuthor")
      */
-    private $reviewAuthor;
-
+    private $authors;
 
 
 
@@ -391,5 +381,49 @@ class User
     public function getReviewAuthor()
     {
         return $this->reviewAuthor;
+    }
+
+    /**
+     * Get pilots
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPilots()
+    {
+        return $this->pilots;
+    }
+
+    /**
+     * Add author
+     *
+     * @param \AppBundle\Entity\Flight $author
+     *
+     * @return User
+     */
+    public function addAuthor(\AppBundle\Entity\Flight $author)
+    {
+        $this->authors[] = $author;
+
+        return $this;
+    }
+
+    /**
+     * Remove author
+     *
+     * @param \AppBundle\Entity\Flight $author
+     */
+    public function removeAuthor(\AppBundle\Entity\Flight $author)
+    {
+        $this->authors->removeElement($author);
+    }
+
+    /**
+     * Get authors
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
     }
 }

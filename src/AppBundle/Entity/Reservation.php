@@ -1,7 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
-
+use Doctrine\ORM\Mapping as ORM;
 /**
  * Reservation
  *
@@ -41,7 +41,7 @@ class Reservation
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Flight", inversedBy="flight")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Flight", inversedBy="flights")
      * @ORM\JoinColumn(nullable=false)
      */
     private $flight;
