@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Flight
  *
@@ -12,6 +11,23 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Flight
 {
+
+    /*
+    *  Adding personal methods /variables
+    */
+    public function __toString()
+    {
+        //return the Flight object with departure and arrival.
+        return $this->departure.'-'.$this->arrival;
+    }
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flight", mappedBy="flight")
+     */
+    private $flights;
+
+
     /**
      * @var int
      *
@@ -20,6 +36,38 @@ class Flight
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Site", inversedBy="departures")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $departure;
+
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Site", inversedBy="arrivals")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $arrival;
+
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PlaneModel", inversedBy="planes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $plane;
+
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="pilots")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $pilot;
 
     /**
      * @var int
@@ -217,5 +265,151 @@ class Flight
     {
         return $this->wasDone;
     }
-}
 
+    /**
+     * Set pilot
+     *
+     * @param integer $pilot
+     *
+     * @return Flight
+     */
+    public function setPilot($pilot)
+    {
+        $this->pilot = $pilot;
+
+        return $this;
+    }
+
+    /**
+     * Get pilot
+     *
+     * @return integer
+     */
+    public function getPilot()
+    {
+        return $this->pilot;
+    }
+
+    /**
+     * Set departure
+     *
+     * @param \AppBundle\Entity\Site $departure
+     *
+     * @return Flight
+     */
+    public function setDeparture($departure)
+    {
+        $this->departure = $departure;
+
+        return $this;
+    }
+
+    /**
+     * Get departure
+     *
+     * @return \AppBundle\Entity\Site
+     */
+    public function getDeparture()
+    {
+        return $this->departure;
+    }
+
+    /**
+     * Set arrival
+     *
+     * @param \AppBundle\Entity\Site $arrival
+     *
+     * @return Flight
+     */
+    public function setArrival($arrival)
+    {
+        $this->arrival = $arrival;
+
+        return $this;
+    }
+
+    /**
+     * Get arrival
+     *
+     * @return \AppBundle\Entity\Site
+     */
+    public function getArrival()
+    {
+        return $this->arrival;
+    }
+
+    /**
+     * Set plane
+     *
+     * @param \AppBundle\Entity\PlaneModel $plane
+     *
+     * @return Flight
+     */
+    public function setPlane($plane)
+    {
+        $this->plane = $plane;
+
+        return $this;
+    }
+
+    /**
+     * Get plane
+     *
+     * @return \AppBundle\Entity\PlaneModel
+     */
+    public function getPlane()
+    {
+        return $this->plane;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->flight = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add flight
+     *
+     * @param \AppBundle\Entity\Flight $flight
+     *
+     * @return Flight
+     */
+    public function addFlight($flight)
+    {
+        $this->flight[] = $flight;
+
+        return $this;
+    }
+
+    /**
+     * Remove flight
+     *
+     * @param \AppBundle\Entity\Flight $flight
+     */
+    public function removeFlight($flight)
+    {
+        $this->flight->removeElement($flight);
+    }
+
+    /**
+     * Get flight
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFlight()
+    {
+        return $this->flight;
+    }
+
+    /**
+     * Get flights
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFlights()
+    {
+        return $this->flights;
+    }
+}
