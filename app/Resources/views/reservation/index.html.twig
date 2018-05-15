@@ -7,7 +7,6 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Passenger</th>
                 <th>Nbreservationseats</th>
                 <th>Publicationdate</th>
                 <th>Wasdone</th>
@@ -18,9 +17,8 @@
         {% for reservation in reservations %}
             <tr>
                 <td><a href="{{ path('reservation_show', { 'id': reservation.id }) }}">{{ reservation.id }}</a></td>
-                <td>{{ reservation.passenger }}</td>
                 <td>{{ reservation.nbReservationSeats }}</td>
-                <td>{{ reservation.publicationDate }}</td>
+                <td>{% if reservation.publicationDate %}{{ reservation.publicationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if reservation.wasDone %}Yes{% else %}No{% endif %}</td>
                 <td>
                     <ul>

@@ -31,9 +31,6 @@ class Reservation
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="passenger", type="integer")
      *
      *
      */
@@ -56,7 +53,7 @@ class Reservation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="publicationDate", type="datetimetz")
+     * @ORM\Column(name="publicationDate", type="datetime")
      */
     private $publicationDate;
 

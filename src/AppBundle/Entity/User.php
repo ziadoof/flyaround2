@@ -29,9 +29,10 @@ class User
 
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flight", mappedBy="reviewAuthor")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="reviewAuthor")
      */
     private $authors;
+
 
 
 
