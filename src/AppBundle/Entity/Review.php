@@ -32,14 +32,15 @@ class Review
      */
     private $id;
 
+    // pas de bidirectionnalité donc pas de inversedBy
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $userRated;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="author")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="authors")
      * @ORM\JoinColumn(nullable=false)
      */
     private $reviewAuthor;

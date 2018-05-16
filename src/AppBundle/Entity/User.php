@@ -34,6 +34,10 @@ class User
     private $authors;
 
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="passenger")
+     */
+    private $passengers;
 
 
     /**
