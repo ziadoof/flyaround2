@@ -3,6 +3,25 @@
 {% block body %}
     <div id="wrapper">
         <div id="container">
+
+            <h1>Routes disponibles :</h1>
+            <ul>
+                <li>
+                    <a href="{{ path('planemodel_index') }}">Voir les avions</a>
+                </li>
+                <li>
+                    <a href="{{ path('reservation_index') }}">Voir les reservations</a>
+                </li>
+                <li>
+                    <a href="{{ path('flight_index') }}">Voir les vols</a>
+                </li>
+                <li>
+                    <a href="{{ path('site_index') }}">Voir les terrains</a>
+                </li>
+            </ul>
+
+
+            <!--
             <div id="welcome">
                 <h1><span>Welcome to</span> Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</h1>
             </div>
@@ -40,7 +59,7 @@
                         How to create your first page in Symfony
                     </a>
                 </p>
-            </div>
+            </div>-->
         </div>
     </div>
 {% endblock %}
