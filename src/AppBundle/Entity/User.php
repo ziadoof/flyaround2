@@ -431,4 +431,37 @@ class User
     {
         return $this->authors;
     }
+
+    /**
+     * Add passenger
+     *
+     * @param \AppBundle\Entity\Reservation $passenger
+     *
+     * @return User
+     */
+    public function addPassenger(\AppBundle\Entity\Reservation $passenger)
+    {
+        $this->passengers[] = $passenger;
+        return $this;
+    }
+    /**
+     * Remove passenger
+     *
+     * @param \AppBundle\Entity\Reservation $passenger
+     */
+    public function removePassenger(\AppBundle\Entity\Reservation $passenger)
+    {
+        $this->passengers->removeElement($passenger);
+    }
+
+    /**
+     * Get passengers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPassengers()
+    {
+        return $this->passengers;
+    }
+
 }
