@@ -1,5 +1,4 @@
 <?php
-
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 /**
@@ -10,17 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Reservation
 {
-
-    /*
-     *  Adding personal methods /variables
-     */
-    public function __toString()
-    {
-        //return the id of the Reservation.
-        return (string)$this->id;
-    }
-
-
     /**
      * @var int
      *
@@ -29,42 +17,37 @@ class Reservation
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="passengers")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $passenger;
-
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Flight", inversedBy="flights")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $flight;
-
     /**
      * @var int
      *
      * @ORM\Column(name="nbReservedSeats", type="smallint")
      */
     private $nbReservedSeats;
-
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="publicationDate", type="datetime")
      */
     private $publicationDate;
-
     /**
      * @var bool
      *
      * @ORM\Column(name="wasDone", type="boolean")
      */
     private $wasDone;
-
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="passengers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $passenger;
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Flight", inversedBy="flights")
+     */
+    private $flight;
+    public function __toString()
+    {
+        return (string)$this->id;
+    }
     /**
      * Get id
      *
@@ -74,7 +57,6 @@ class Reservation
     {
         return $this->id;
     }
-
     /**
      * Set nbReservedSeats
      *
@@ -87,7 +69,6 @@ class Reservation
         $this->nbReservedSeats = $nbReservedSeats;
         return $this;
     }
-
     /**
      * Get nbReservedSeats
      *
@@ -97,7 +78,6 @@ class Reservation
     {
         return $this->nbReservedSeats;
     }
-
     /**
      * Set publicationDate
      *
@@ -108,10 +88,8 @@ class Reservation
     public function setPublicationDate($publicationDate)
     {
         $this->publicationDate = $publicationDate;
-
         return $this;
     }
-
     /**
      * Get publicationDate
      *
@@ -121,7 +99,6 @@ class Reservation
     {
         return $this->publicationDate;
     }
-
     /**
      * Set wasDone
      *
@@ -132,10 +109,8 @@ class Reservation
     public function setWasDone($wasDone)
     {
         $this->wasDone = $wasDone;
-
         return $this;
     }
-
     /**
      * Get wasDone
      *
@@ -145,31 +120,27 @@ class Reservation
     {
         return $this->wasDone;
     }
-
     /**
      * Set passenger
      *
-     * @param integer $passenger
+     * @param \AppBundle\Entity\User $passenger
      *
      * @return Reservation
      */
-    public function setPassenger($passenger)
+    public function setPassenger(\AppBundle\Entity\User $passenger)
     {
         $this->passenger = $passenger;
-
         return $this;
     }
-
     /**
      * Get passenger
      *
-     * @return integer
+     * @return \AppBundle\Entity\User
      */
     public function getPassenger()
     {
         return $this->passenger;
     }
-
     /**
      * Set flight
      *
@@ -177,13 +148,11 @@ class Reservation
      *
      * @return Reservation
      */
-    public function setFlight($flight)
+    public function setFlight(\AppBundle\Entity\Flight $flight = null)
     {
         $this->flight = $flight;
-
         return $this;
     }
-
     /**
      * Get flight
      *

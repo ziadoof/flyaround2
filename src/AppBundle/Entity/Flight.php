@@ -1,11 +1,6 @@
 <?php
-
 namespace AppBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-
-//test branch routes
-
 /**
  * Flight
  *
@@ -14,23 +9,30 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Flight
 {
-
-    /*
-    *  Adding personal methods /variables
-    */
-    public function __toString()
-    {
-        //return the Flight object with departure and arrival.
-        return $this->departure.'-'.$this->arrival;
-    }
-
-
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="Flight")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Site", inversedBy="departures")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $departure;
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Site", inversedBy="arrivals")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $arrival;
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PlaneModel", inversedBy="planes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $plane;
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="pilots")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $pilot;
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="flight")
      */
     private $flights;
-
-
     /**
      * @var int
      *
@@ -39,82 +41,49 @@ class Flight
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Site", inversedBy="departures")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $departure;
-
-
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Site", inversedBy="arrivals")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $arrival;
-
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PlaneModel", inversedBy="planes")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $plane;
-
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="pilots")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $pilot;
-
     /**
      * @var int
      *
      * @ORM\Column(name="nbFreeSeats", type="smallint")
      */
     private $nbFreeSeats;
-
     /**
      * @var float
      *
      * @ORM\Column(name="seatPrice", type="float")
      */
     private $seatPrice;
-
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="teakOffTime", type="datetime")
+     * @ORM\Column(name="takeOffTime", type="datetime")
      */
-    private $teakOffTime;
-
+    private $takeOffTime;
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="publicationDate", type="datetime")
      */
     private $publicationDate;
-
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
-
     /**
      * @var bool
      *
      * @ORM\Column(name="wasDone", type="boolean")
      */
     private $wasDone;
-
-
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->departure . ' ' . $this->arrival;
+    }
     /**
      * Get id
      *
@@ -124,7 +93,6 @@ class Flight
     {
         return $this->id;
     }
-
     /**
      * Set nbFreeSeats
      *
@@ -135,10 +103,8 @@ class Flight
     public function setNbFreeSeats($nbFreeSeats)
     {
         $this->nbFreeSeats = $nbFreeSeats;
-
         return $this;
     }
-
     /**
      * Get nbFreeSeats
      *
@@ -148,7 +114,6 @@ class Flight
     {
         return $this->nbFreeSeats;
     }
-
     /**
      * Set seatPrice
      *
@@ -159,10 +124,8 @@ class Flight
     public function setSeatPrice($seatPrice)
     {
         $this->seatPrice = $seatPrice;
-
         return $this;
     }
-
     /**
      * Get seatPrice
      *
@@ -172,31 +135,27 @@ class Flight
     {
         return $this->seatPrice;
     }
-
     /**
-     * Set teakOffTime
+     * Set takeOffTime
      *
-     * @param \DateTime $teakOffTime
+     * @param \DateTime $takeOffTime
      *
      * @return Flight
      */
-    public function setTeakOffTime($teakOffTime)
+    public function setTakeOffTime($takeOffTime)
     {
-        $this->teakOffTime = $teakOffTime;
-
+        $this->takeOffTime = $takeOffTime;
         return $this;
     }
-
     /**
-     * Get teakOffTime
+     * Get takeOffTime
      *
      * @return \DateTime
      */
-    public function getTeakOffTime()
+    public function getTakeOffTime()
     {
-        return $this->teakOffTime;
+        return $this->takeOffTime;
     }
-
     /**
      * Set publicationDate
      *
@@ -207,10 +166,8 @@ class Flight
     public function setPublicationDate($publicationDate)
     {
         $this->publicationDate = $publicationDate;
-
         return $this;
     }
-
     /**
      * Get publicationDate
      *
@@ -220,7 +177,6 @@ class Flight
     {
         return $this->publicationDate;
     }
-
     /**
      * Set description
      *
@@ -231,10 +187,8 @@ class Flight
     public function setDescription($description)
     {
         $this->description = $description;
-
         return $this;
     }
-
     /**
      * Get description
      *
@@ -244,7 +198,6 @@ class Flight
     {
         return $this->description;
     }
-
     /**
      * Set wasDone
      *
@@ -255,10 +208,8 @@ class Flight
     public function setWasDone($wasDone)
     {
         $this->wasDone = $wasDone;
-
         return $this;
     }
-
     /**
      * Get wasDone
      *
@@ -268,31 +219,6 @@ class Flight
     {
         return $this->wasDone;
     }
-
-    /**
-     * Set pilot
-     *
-     * @param integer $pilot
-     *
-     * @return Flight
-     */
-    public function setPilot($pilot)
-    {
-        $this->pilot = $pilot;
-
-        return $this;
-    }
-
-    /**
-     * Get pilot
-     *
-     * @return integer
-     */
-    public function getPilot()
-    {
-        return $this->pilot;
-    }
-
     /**
      * Set departure
      *
@@ -300,13 +226,11 @@ class Flight
      *
      * @return Flight
      */
-    public function setDeparture($departure)
+    public function setDeparture(\AppBundle\Entity\Site $departure)
     {
         $this->departure = $departure;
-
         return $this;
     }
-
     /**
      * Get departure
      *
@@ -316,7 +240,13 @@ class Flight
     {
         return $this->departure;
     }
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->flights = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     /**
      * Set arrival
      *
@@ -324,13 +254,11 @@ class Flight
      *
      * @return Flight
      */
-    public function setArrival($arrival)
+    public function setArrival(\AppBundle\Entity\Site $arrival)
     {
         $this->arrival = $arrival;
-
         return $this;
     }
-
     /**
      * Get arrival
      *
@@ -340,7 +268,6 @@ class Flight
     {
         return $this->arrival;
     }
-
     /**
      * Set plane
      *
@@ -348,13 +275,11 @@ class Flight
      *
      * @return Flight
      */
-    public function setPlane($plane)
+    public function setPlane(\AppBundle\Entity\PlaneModel $plane)
     {
         $this->plane = $plane;
-
         return $this;
     }
-
     /**
      * Get plane
      *
@@ -365,47 +290,47 @@ class Flight
         return $this->plane;
     }
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->flight = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add flight
+     * Set pilot
      *
-     * @param \AppBundle\Entity\Flight $flight
+     * @param \AppBundle\Entity\User $pilot
      *
      * @return Flight
      */
-    public function addFlight($flight)
+    public function setPilot(\AppBundle\Entity\User $pilot)
     {
-        $this->flight[] = $flight;
-
+        $this->pilot = $pilot;
         return $this;
     }
-
+    /**
+     * Get pilot
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getPilot()
+    {
+        return $this->pilot;
+    }
+    /**
+     * Add flight
+     *
+     * @param \AppBundle\Entity\Reservation $flight
+     *
+     * @return Flight
+     */
+    public function addFlight(\AppBundle\Entity\Reservation $flight)
+    {
+        $this->flights[] = $flight;
+        return $this;
+    }
     /**
      * Remove flight
      *
-     * @param \AppBundle\Entity\Flight $flight
+     * @param \AppBundle\Entity\Reservation $flight
      */
-    public function removeFlight($flight)
+    public function removeFlight(\AppBundle\Entity\Reservation $flight)
     {
-        $this->flight->removeElement($flight);
+        $this->flights->removeElement($flight);
     }
-
-    /**
-     * Get flight
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getFlight()
-    {
-        return $this->flight;
-    }
-
     /**
      * Get flights
      *
