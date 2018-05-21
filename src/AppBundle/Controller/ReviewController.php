@@ -12,6 +12,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 
 
+/**
+ * Review controller.
+ *
+ * @Route("review")
+ */
+
 class ReviewController extends Controller
 {
     /**
@@ -34,7 +40,7 @@ class ReviewController extends Controller
      * new review
      *
      * @Route ("/review/new", name="new_review")
-     * @Method("POST")
+     * @Method({"GET", "POST"})
      */
     public function newAction()
     {
