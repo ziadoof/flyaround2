@@ -46,9 +46,9 @@ class Reservation
     /**
      * @var int
      *
-     * @ORM\Column(name="nbReservationSeats", type="smallint")
+     * @ORM\Column(name="nbReservedSeats", type="smallint")
      */
-    private $nbReservationSeats;
+    private $nbReservedSeats;
 
     /**
      * @var \DateTime
@@ -76,27 +76,26 @@ class Reservation
     }
 
     /**
-     * Set nbReservationSeats
+     * Set nbReservedSeats
      *
-     * @param integer $nbReservationSeats
+     * @param integer $nbReservedSeats
      *
      * @return Reservation
      */
-    public function setNbReservationSeats($nbReservationSeats)
+    public function setNbReservedSeats($nbReservedSeats)
     {
-        $this->nbReservationSeats = $nbReservationSeats;
-
+        $this->nbReservedSeats = $nbReservedSeats;
         return $this;
     }
 
     /**
-     * Get nbReservationSeats
+     * Get nbReservedSeats
      *
      * @return int
      */
-    public function getNbReservationSeats()
+    public function getNbReservedSeats()
     {
-        return $this->nbReservationSeats;
+        return $this->nbReservedSeats;
     }
 
     /**

@@ -26,7 +26,7 @@ class Flight
 
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flight", mappedBy="Flight")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="Flight")
      */
     private $flights;
 
