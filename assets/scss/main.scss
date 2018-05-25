@@ -1,6 +1,5 @@
 $brand-primary: darken(red, 20%);
-$back : darken(red,20);
     body{
         color: $brand-primary;
-        background-color: $back;
     }
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
